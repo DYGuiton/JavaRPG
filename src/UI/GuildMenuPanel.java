@@ -2,6 +2,8 @@ package UI;
 
 import UI.InterfaceFrame;
 import java.awt.*;
+import java.awt.geom.Point2D;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -10,13 +12,16 @@ import java.awt.*;
 public class GuildMenuPanel extends javax.swing.JPanel {
 
     InterfaceFrame theInterface;
+    GuildGraphicsManager theGraphicsManager;
     ScreenDimensions sd;
     int x, y, width, height;
 
     public GuildMenuPanel(InterfaceFrame nuInterface) {
+        initComponents();
         theInterface = nuInterface;
         this.sd = new ScreenDimensions();
-        initComponents();
+        theGraphicsManager = new GuildGraphicsManager();
+
         setupSwingComponents();
         setLayout(null);
         setVisible(true);
@@ -24,27 +29,33 @@ public class GuildMenuPanel extends javax.swing.JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(Color.blue);
-        g.fillOval(100, 100, 100, 100);            // Just checking!
+
+        Graphics2D g2 = (Graphics2D) g;
+        
+        //sets smooth stroke!
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+        //sets smooth stroke!
+        
+        theGraphicsManager.paintGraphics(g);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        openDatabaseButton = new javax.swing.JButton();
         characterInfoPanel = new javax.swing.JPanel();
 
-        setLayout(null);
-
-        openDatabaseButton.setText("Open Database");
-        openDatabaseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                openDatabaseButtonActionPerformed(evt);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
             }
         });
-        add(openDatabaseButton);
-        openDatabaseButton.setBounds(10, 11, 107, 23);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+        });
+        setLayout(null);
 
         characterInfoPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -63,19 +74,53 @@ public class GuildMenuPanel extends javax.swing.JPanel {
         characterInfoPanel.setBounds(290, 0, 110, 240);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void openDatabaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openDatabaseButtonActionPerformed
-        theInterface.openDatabasePanel();
-    }//GEN-LAST:event_openDatabaseButtonActionPerformed
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        handleMousePressed();
+    }//GEN-LAST:event_formMousePressed
+
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+        handleMouseMoved();
+    }//GEN-LAST:event_formMouseMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel characterInfoPanel;
-    private javax.swing.JButton openDatabaseButton;
     // End of variables declaration//GEN-END:variables
 
     private void setupSwingComponents() {
 
+    }
 
+    private void handleMousePressed() {
+        Point p = MouseInfo.getPointerInfo().getLocation();
+        SwingUtilities.convertPointFromScreen(p, this);
+        double x = p.getX();
+        double y = p.getY();
+
+        Point2D.Double mousePosition = new Point2D.Double(x, y);
+
+        checkIconPressed(mousePosition);
+    }
+
+    private void handleMouseMoved() {
+        Point p = MouseInfo.getPointerInfo().getLocation();
+        SwingUtilities.convertPointFromScreen(p, this);
+        double x = p.getX();
+        double y = p.getY();
+
+        Point2D.Double mousePosition = new Point2D.Double(x, y);
+
+        checkIconHoverOver(mousePosition);
+    }
+
+    private void checkIconPressed(Point2D.Double mousePosition) {
+        theGraphicsManager.handlePlayerCharacterMousePressed(mousePosition);
+        repaint();
+    }
+
+    private void checkIconHoverOver(Point2D.Double mousePosition) {
+        theGraphicsManager.handlePlayerCharacterHoverOver(mousePosition);
+        repaint();
     }
 
 }
