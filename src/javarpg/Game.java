@@ -14,7 +14,7 @@ public class Game implements Serializable {
     InterfaceFrame theInterfaceFrame;
     MainMenuPanel theMainMenuPanel;
     DatabasePanel theDatabasePanel;
-    GuildMenuPanel theGuildPanel;
+    HomeMenuPanel theGuildPanel;
 
     private Boolean isInterfaceVisible = false;
 
@@ -59,7 +59,7 @@ public class Game implements Serializable {
 
     public void startNewGame() {
         theGameManager.createUserManager();
-        theGuildPanel = new GuildMenuPanel(theInterfaceFrame);
+        theGuildPanel = new HomeMenuPanel(theInterfaceFrame);
         theInterfaceFrame.setGuildMenuPanel(theGuildPanel);
         theInterfaceFrame.openGuildMenuPanel();
     }
@@ -67,7 +67,7 @@ public class Game implements Serializable {
     public void startGame(GameManager savedGameManager) {
         theGameManager = savedGameManager;
         theGameManager.createUserManager();
-        theGuildPanel = new GuildMenuPanel(theInterfaceFrame);
+        theGuildPanel = new HomeMenuPanel(theInterfaceFrame);
         theInterfaceFrame.setGuildMenuPanel(theGuildPanel);
         theInterfaceFrame.openGuildMenuPanel();
 

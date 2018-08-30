@@ -21,7 +21,7 @@ public class InterfaceFrame extends javax.swing.JFrame {
     private MainMenuPanel theMainPanel;
     private DatabasePanel theDatabasePanel;
     private NewGamePanel theNewGamePanel;
-    private GuildMenuPanel theGuildMenuPanel;
+    private HomeMenuPanel theGuildMenuPanel;
 
     //Boolean isVisible = false;
     /**
@@ -126,7 +126,7 @@ public class InterfaceFrame extends javax.swing.JFrame {
         theNewGamePanel = nuNewGamePanel;
     }
     
-    public void setGuildMenuPanel(GuildMenuPanel nuGuildMenuPanel){
+    public void setGuildMenuPanel(HomeMenuPanel nuGuildMenuPanel){
         theGuildMenuPanel = nuGuildMenuPanel;
     }
     

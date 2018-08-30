@@ -9,18 +9,18 @@ import javax.swing.SwingUtilities;
  *
  * @author Admin Aug 5, 2018 3:07:50 AM
  */
-public class GuildMenuPanel extends javax.swing.JPanel {
+public class HomeMenuPanel extends javax.swing.JPanel {
 
     InterfaceFrame theInterface;
-    GuildGraphicsManager theGraphicsManager;
-    ScreenDimensions sd;
+    HomeGraphicsManager theGraphicsManager;
+    ScreenDimensions scrnDim;
     int x, y, width, height;
 
-    public GuildMenuPanel(InterfaceFrame nuInterface) {
+    public HomeMenuPanel(InterfaceFrame nuInterface) {
         initComponents();
         theInterface = nuInterface;
-        this.sd = new ScreenDimensions();
-        theGraphicsManager = new GuildGraphicsManager();
+        this.scrnDim = new ScreenDimensions();
+        theGraphicsManager = new HomeGraphicsManager();
 
         setupSwingComponents();
         setLayout(null);
@@ -31,11 +31,12 @@ public class GuildMenuPanel extends javax.swing.JPanel {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
-        
+
         //sets smooth stroke!
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         //sets smooth stroke!
-        
+        Font font = new Font("Palatino Linotype", Font.BOLD, 12);
+        g2.setFont(font);
         theGraphicsManager.paintGraphics(g);
     }
 
@@ -88,7 +89,7 @@ public class GuildMenuPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void setupSwingComponents() {
-
+        characterInfoPanel.setBounds(scrnDim.getWidth() - scrnDim.getWidth() / 5, scrnDim.getY()+scrnDim.getHeight()/8, scrnDim.getWidth() / 5, (int) (scrnDim.getHeight() / 1.5));
     }
 
     private void handleMousePressed() {

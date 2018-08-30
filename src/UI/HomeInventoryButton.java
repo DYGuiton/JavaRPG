@@ -10,12 +10,11 @@ import java.awt.geom.Point2D;
 /**
  * @author Yurichi
  */
-public class GuildInventoryButton extends CustomButton {
+public class HomeInventoryButton extends CustomButton {
 
     Ellipse2D.Double shape, outline;
-    Color outlineColor;
 
-    public GuildInventoryButton(Point2D.Double location, Color color, Color nuOutlineColor, int size, ScreenDimensions scrnDim) {
+    public HomeInventoryButton(Point2D.Double location, Color color, Color nuOutlineColor, int size, ScreenDimensions scrnDim) {
 
         super(location, color, size, scrnDim);
         outlineColor = nuOutlineColor;
@@ -25,13 +24,18 @@ public class GuildInventoryButton extends CustomButton {
     @Override
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.setStroke(new BasicStroke(2));
-        drawShape(g2);
+        fillShape(g2);
         if (mouseOver) {
             g.setColor(color);
-            fillShape(g2);
+            drawShape(g2, 2);
             g.setColor(outlineColor);
-            drawOutline(g2);
+            drawOutline(g2, 3);
+            g2.setColor(Color.ORANGE);
+            g2.drawString("Inventory", (int) (location.x + scrnDim.getWidth() / 400), (int) (location.y + scrnDim.getHeight() / 10));
+        } else {
+            g2.setColor(Color.BLACK);
+            g2.drawString("Inventory", (int) (location.x + scrnDim.getWidth() / 400), (int) (location.y + scrnDim.getHeight() / 10));
+
         }
     }
 
@@ -49,6 +53,7 @@ public class GuildInventoryButton extends CustomButton {
     @Override
     public void mouseOverAction() {
         mouseOver = true;
+
     }
 
     @Override
@@ -58,9 +63,11 @@ public class GuildInventoryButton extends CustomButton {
     }
 
     @Override
-    public void drawShape(Graphics2D g2) {
+    public void drawShape(Graphics2D g2, int size) {
+        g2.setStroke(new BasicStroke(size));
         g2.setColor(color);
         g2.draw(shape);
+        g2.setStroke(new BasicStroke(2));
     }
 
     @Override
@@ -69,8 +76,9 @@ public class GuildInventoryButton extends CustomButton {
         g2.fill(shape);
     }
 
-    public void drawOutline(Graphics2D g2) {
-        g2.setStroke(new BasicStroke(3));
+    @Override
+    public void drawOutline(Graphics2D g2, int size) {
+        g2.setStroke(new BasicStroke(size));
         g2.setColor(outlineColor);
         g2.draw(outline);
         g2.setStroke(new BasicStroke(2));

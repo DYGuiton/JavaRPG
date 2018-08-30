@@ -11,7 +11,7 @@ import java.awt.geom.Point2D;
  */
 public abstract class CustomIcon {
 
-    public static int BASESIZE = 10;
+    public int BASESIZE = 10;
     ScreenDimensions scrnDim;
     Point2D.Double location;
     int size;
@@ -33,7 +33,7 @@ public abstract class CustomIcon {
 
     public abstract void setShape();
 
-    public abstract void drawShape(Graphics2D g2);
+    public abstract void drawShape(Graphics2D g2, int size);
 
     public abstract void fillShape(Graphics2D g2);
 

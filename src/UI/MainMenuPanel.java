@@ -30,7 +30,6 @@ public class MainMenuPanel extends javax.swing.JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.fillOval(100, 100, 100, 100);            // Just checking!
     }
 
     @SuppressWarnings("unchecked")
