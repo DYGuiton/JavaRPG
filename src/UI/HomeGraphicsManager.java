@@ -1,8 +1,11 @@
 package UI;
 
+import java.awt.BasicStroke;
 import java.awt.geom.Point2D;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 
 /**
  * @author Yurichi
@@ -13,6 +16,10 @@ public class HomeGraphicsManager {
     int panelButtonSpaceX, panelButtonSpaceY;
     CustomButton[] panelButtons;
     CustomButton questBoardButton;
+    HomePartySidePanel theHPSP;
+
+    Rectangle2D.Double backBar;
+
     int panelButtonCount;
 
     //GuildInventoryButton gib;
@@ -22,10 +29,17 @@ public class HomeGraphicsManager {
 
         setPanelButtonSpace();
         setupClickableGraphics();
-        //setupNonClickableGraphics();
+        setupNonClickableGraphics();
     }
 
     public void paintGraphics(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(Color.white);
+        g2.fill(backBar);
+//        g2.setColor(Color.CYAN);
+//        g2.setStroke(new BasicStroke(3));
+//        g2.draw(backBar);
+
         for (CustomButton panelButton : panelButtons) {
             panelButton.paint(g);
         }
@@ -44,6 +58,10 @@ public class HomeGraphicsManager {
 
     }
 
+    public void setHomePartySidePanel(HomePartySidePanel nuHPSP) {
+        theHPSP = nuHPSP;
+    }
+
     void handlePlayerCharacterHoverOver(Point2D.Double mousePosition) {
         for (int i = 0; i < panelButtons.length; i++) {
             if (panelButtons[i].contains(mousePosition)) {
@@ -58,6 +76,10 @@ public class HomeGraphicsManager {
         } else {
             questBoardButton.mouseOver = false;
         }
+    }
+
+    void handleHomePartySidePanelHoverOver(Point2D.Double mousePosition) {
+        theHPSP.handleHoverOver(mousePosition);
     }
 
     void handlePlayerCharacterMousePressed(Point2D.Double mousePosition) {
@@ -121,6 +143,11 @@ public class HomeGraphicsManager {
         location.x = scrnDim.getWidth() / 2;
         location.y = panelButtonSpaceY;
         return new HomeQuestBoardButton(location, color, nuOutlineColor, size, scrnDim);
+    }
+
+    private void setupNonClickableGraphics() {
+        backBar = new Rectangle2D.Double();
+        backBar.setRect(scrnDim.getX(), panelButtonSpaceY + scrnDim.getHeight() / 50, scrnDim.getWidth(), scrnDim.getHeight() / 50);
     }
 
 }

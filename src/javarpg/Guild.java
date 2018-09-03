@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * @author Yurichi
  */
-public class Guild implements Serializable{
+public class Guild implements Serializable {
 
     RPGCharacterPlayable leader;
     PlayerParty myParty;
@@ -28,7 +28,8 @@ public class Guild implements Serializable{
         guildMembersList.add(leader);
         guildMembersMap.put(leader);
         myParty = new PlayerParty(leader);
-        size = 0;
+
+        addTestMembers();
 
     }
 
@@ -39,8 +40,12 @@ public class Guild implements Serializable{
     }
 
     public void addGuildMember(int nuCharacterID) {
-        RPGCharacterPlayable nuMember = (RPGCharacterPlayable) theRPGDatabase.copyPlayableCharacterById(nuCharacterID);
-        size++;
+        if (guildMembersMap.getByID(nuCharacterID) == null) {
+            RPGCharacterPlayable nuMember = (RPGCharacterPlayable) theRPGDatabase.copyPlayableCharacterById(nuCharacterID);
+            guildMembersList.add(nuMember);
+            guildMembersMap.put(nuMember);
+            size++;
+        }
     }
 
     public RPGCharacter removeGuildMember(int characterID) {
@@ -73,6 +78,10 @@ public class Guild implements Serializable{
         return myParty.removeCharacter(characterID);
     }
 
+    public Party getParty() {
+        return myParty;
+    }
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("This is Guild: " + name);
@@ -81,5 +90,15 @@ public class Guild implements Serializable{
         sb.append("Current Party Size: " + myParty.getSize());
 
         return sb.toString();
+    }
+
+    private void addTestMembers() {
+        addGuildMember(1);
+        addPartyMember(1);
+        addGuildMember(2);
+        addPartyMember(2);
+        addGuildMember(3);
+        addPartyMember(3);
+        
     }
 }

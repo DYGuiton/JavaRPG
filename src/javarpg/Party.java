@@ -15,6 +15,7 @@ public abstract class Party {
     RPGCharacter leader;
 
     public Party(RPGCharacter nuLeader) {
+        leader = nuLeader;
         partyMembers.add(leader);
         lvl = 0;
         xp = 0;

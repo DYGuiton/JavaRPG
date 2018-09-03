@@ -1,12 +1,14 @@
 package javarpg;
 
-import CharacterComponents.RPGCharacterPlayable;
+import CharacterComponents.RPGCharacter;
 
-/** @author Yurichi*/
-class PlayerParty extends Party{
+/**
+ * @author Yurichi
+ */
+public class PlayerParty extends Party {
 
-    public PlayerParty (RPGCharacterPlayable leader){
-        super(leader);
+    public PlayerParty(RPGCharacter nuLeader) {
+        super(nuLeader);
     }
-    
+
 }

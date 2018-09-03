@@ -19,5 +19,9 @@ public class UserManager implements Serializable{
         myGuild = new Guild(theRPGDatabase);
         
     }
+    
+    public Guild getGuild(){
+        return myGuild;
+    }
 
 }

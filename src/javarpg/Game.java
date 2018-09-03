@@ -59,7 +59,7 @@ public class Game implements Serializable {
 
     public void startNewGame() {
         theGameManager.createUserManager();
-        theGuildPanel = new HomeMenuPanel(theInterfaceFrame);
+        theGuildPanel = new HomeMenuPanel(theInterfaceFrame, theGameManager);
         theInterfaceFrame.setGuildMenuPanel(theGuildPanel);
         theInterfaceFrame.openGuildMenuPanel();
     }
@@ -67,7 +67,7 @@ public class Game implements Serializable {
     public void startGame(GameManager savedGameManager) {
         theGameManager = savedGameManager;
         theGameManager.createUserManager();
-        theGuildPanel = new HomeMenuPanel(theInterfaceFrame);
+        theGuildPanel = new HomeMenuPanel(theInterfaceFrame, theGameManager);
         theInterfaceFrame.setGuildMenuPanel(theGuildPanel);
         theInterfaceFrame.openGuildMenuPanel();
 

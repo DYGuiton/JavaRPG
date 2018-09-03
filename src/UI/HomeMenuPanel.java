@@ -3,6 +3,8 @@ package UI;
 import UI.InterfaceFrame;
 import java.awt.*;
 import java.awt.geom.Point2D;
+import javarpg.GameManager;
+import javax.swing.BorderFactory;
 import javax.swing.SwingUtilities;
 
 /**
@@ -11,14 +13,17 @@ import javax.swing.SwingUtilities;
  */
 public class HomeMenuPanel extends javax.swing.JPanel {
 
+    GameManager theGameManager;
     InterfaceFrame theInterface;
     HomeGraphicsManager theGraphicsManager;
+    HomePartySidePanel theHPSP;
     ScreenDimensions scrnDim;
     int x, y, width, height;
 
-    public HomeMenuPanel(InterfaceFrame nuInterface) {
+    public HomeMenuPanel(InterfaceFrame nuInterface, GameManager nuGameManager) {
         initComponents();
         theInterface = nuInterface;
+        theGameManager = nuGameManager;
         this.scrnDim = new ScreenDimensions();
         theGraphicsManager = new HomeGraphicsManager();
 
@@ -44,8 +49,6 @@ public class HomeMenuPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        characterInfoPanel = new javax.swing.JPanel();
-
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 formMouseMoved(evt);
@@ -57,22 +60,6 @@ public class HomeMenuPanel extends javax.swing.JPanel {
             }
         });
         setLayout(null);
-
-        characterInfoPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout characterInfoPanelLayout = new javax.swing.GroupLayout(characterInfoPanel);
-        characterInfoPanel.setLayout(characterInfoPanelLayout);
-        characterInfoPanelLayout.setHorizontalGroup(
-            characterInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 108, Short.MAX_VALUE)
-        );
-        characterInfoPanelLayout.setVerticalGroup(
-            characterInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 238, Short.MAX_VALUE)
-        );
-
-        add(characterInfoPanel);
-        characterInfoPanel.setBounds(290, 0, 110, 240);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
@@ -85,11 +72,16 @@ public class HomeMenuPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel characterInfoPanel;
     // End of variables declaration//GEN-END:variables
-
     private void setupSwingComponents() {
-        characterInfoPanel.setBounds(scrnDim.getWidth() - scrnDim.getWidth() / 5, scrnDim.getY()+scrnDim.getHeight()/8, scrnDim.getWidth() / 5, (int) (scrnDim.getHeight() / 1.5));
+        theHPSP = new HomePartySidePanel(theGameManager.getUserManager().getGuild());
+        this.add(theHPSP);
+        theHPSP.setBorder(BorderFactory.createLineBorder(Color.black));
+        theHPSP.setBounds(scrnDim.getWidth() - scrnDim.getWidth() / 5, scrnDim.getY() + scrnDim.getHeight() / 8,
+                scrnDim.getWidth() / 5, (int) (scrnDim.getHeight() / 1.5));
+        theHPSP.setDimensions();
+        theHPSP.setCharacterDisplays();
+        theGraphicsManager.setHomePartySidePanel(theHPSP);
     }
 
     private void handleMousePressed() {
@@ -121,6 +113,7 @@ public class HomeMenuPanel extends javax.swing.JPanel {
 
     private void checkIconHoverOver(Point2D.Double mousePosition) {
         theGraphicsManager.handlePlayerCharacterHoverOver(mousePosition);
+        theGraphicsManager.handleHomePartySidePanelHoverOver(mousePosition);
         repaint();
     }
 
