@@ -29,15 +29,15 @@ public class HomeMenuButton extends CustomButton {
             g.setColor(outlineColor);
             drawOutline(g2, 3);
             g2.setColor(Color.ORANGE);
-            g2.drawString("Home", (int) (location.x + scrnDim.getWidth() / 90), (int) (location.y + scrnDim.getHeight() / 10));
+            g2.drawString("Menu", (int) (location.x + scrnDim.getWidth() / 90), (int) (location.y + scrnDim.getHeight() / 10));
         } else {
             g2.setColor(Color.BLACK);
-            g2.drawString("Home", (int) (location.x + scrnDim.getWidth() / 90), (int) (location.y + scrnDim.getHeight() / 10));
+            g2.drawString("Menu", (int) (location.x + scrnDim.getWidth() / 90), (int) (location.y + scrnDim.getHeight() / 10));
         }
     }
 
     @Override
-    public void mousePressed() {
+    public boolean mousePressed() {
         System.out.println("Button Pressed");
         //further implementation later  
     }

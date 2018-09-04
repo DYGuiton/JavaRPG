@@ -45,7 +45,7 @@ public class HomeGuildButton extends CustomButton {
     }
 
     @Override
-    public void mousePressed() {
+    public boolean mousePressed() {
         System.out.println("Button Pressed");
         //further implementation later        
     }

@@ -19,6 +19,8 @@ public class HomeGraphicsManager {
     HomePartySidePanel theHPSP;
 
     Rectangle2D.Double backBar;
+    HomeMunnyIcon theMunnyIcon;
+    HomeGuildIcon theGuildIcon;
 
     int panelButtonCount;
 
@@ -44,6 +46,11 @@ public class HomeGraphicsManager {
             panelButton.paint(g);
         }
         questBoardButton.paint(g);
+
+        theMunnyIcon.paint(g);
+        
+        theGuildIcon.paint(g);
+
     }
 
     private void setupClickableGraphics() {
@@ -62,7 +69,7 @@ public class HomeGraphicsManager {
         theHPSP = nuHPSP;
     }
 
-    void handlePlayerCharacterHoverOver(Point2D.Double mousePosition) {
+    void handleHoverOver(Point2D.Double mousePosition) {
         for (int i = 0; i < panelButtons.length; i++) {
             if (panelButtons[i].contains(mousePosition)) {
                 panelButtons[i].mouseOver = true;
@@ -82,7 +89,7 @@ public class HomeGraphicsManager {
         theHPSP.handleHoverOver(mousePosition);
     }
 
-    void handlePlayerCharacterMousePressed(Point2D.Double mousePosition) {
+    void handleMousePressed(Point2D.Double mousePosition) {
         for (int i = 0; i < panelButtons.length; i++) {
             if (panelButtons[i].contains(mousePosition)) {
                 panelButtons[i].mousePressed();
@@ -98,7 +105,6 @@ public class HomeGraphicsManager {
 //    }
     private void setPanelButtonSpace() {
         panelButtonSpaceX = (int) (scrnDim.getWidth() - scrnDim.getWidth() / 2.5);
-        System.out.println(panelButtonSpaceX);
         panelButtonSpaceY = scrnDim.getHeight() - scrnDim.getHeight() / 7;
     }
 
@@ -146,8 +152,32 @@ public class HomeGraphicsManager {
     }
 
     private void setupNonClickableGraphics() {
+        createBackBar();
+        createMunnyIcon();
+        createGuildIcon();
+    }
+
+    private void createBackBar() {
         backBar = new Rectangle2D.Double();
         backBar.setRect(scrnDim.getX(), panelButtonSpaceY + scrnDim.getHeight() / 50, scrnDim.getWidth(), scrnDim.getHeight() / 50);
+    }
+
+    private void createMunnyIcon() {
+        Point2D.Double location = new Point2D.Double(scrnDim.getWidth() / 8, scrnDim.getHeight() - scrnDim.getHeight() / 12);
+        theMunnyIcon = new HomeMunnyIcon(location, Color.BLACK, 42, scrnDim);
+    }
+
+    public void setMunny(int munny) {
+        theMunnyIcon.setMunny(munny);
+    }
+
+    private void createGuildIcon() {
+        Point2D.Double location = new Point2D.Double(scrnDim.getWidth() / 50, scrnDim.getHeight() / 40);
+        theGuildIcon = new HomeGuildIcon(location, Color.RED, 1, scrnDim);
+    }
+    
+    public void setGuildName(String name){
+        theGuildIcon.setGuildName(name);
     }
 
 }

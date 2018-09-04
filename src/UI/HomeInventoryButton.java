@@ -57,9 +57,8 @@ public class HomeInventoryButton extends CustomButton {
     }
 
     @Override
-    public void mousePressed() {
-        System.out.println("Button Pressed");
-        //further implementation later
+    public boolean mousePressed() {
+        return 
     }
 
     @Override

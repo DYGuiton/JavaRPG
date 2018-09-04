@@ -20,6 +20,8 @@ public class Guild implements Serializable {
     String name;
     int size;
 
+    private int munny;
+
     public Guild(RPGDatabase theRPGDatabase) {
         this.theRPGDatabase = theRPGDatabase;
         guildMembersList = new CharacterList();
@@ -28,6 +30,10 @@ public class Guild implements Serializable {
         guildMembersList.add(leader);
         guildMembersMap.put(leader);
         myParty = new PlayerParty(leader);
+        
+        name = "Knights of the Blood Oath";
+
+        munny = 10;
 
         addTestMembers();
 
@@ -78,8 +84,26 @@ public class Guild implements Serializable {
         return myParty.removeCharacter(characterID);
     }
 
+    public String getName() {
+        return name;
+    }
+
     public Party getParty() {
         return myParty;
+    }
+
+    public int getMunny() {
+        return munny;
+    }
+
+    public int subtractMunny(int cost) {
+        munny = munny - cost;
+        return munny;
+    }
+
+    public int addMunny(int pay) {
+        munny = munny + pay;
+        return munny;
     }
 
     public String toString() {
@@ -99,6 +123,6 @@ public class Guild implements Serializable {
         addPartyMember(2);
         addGuildMember(3);
         addPartyMember(3);
-        
+
     }
 }

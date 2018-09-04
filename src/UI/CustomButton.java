@@ -21,7 +21,7 @@ public abstract class CustomButton extends CustomIcon {
     public abstract void paint(Graphics g);
     
     
-    public abstract void mousePressed();
+    public abstract boolean mousePressed();
     
     public abstract void drawOutline(Graphics2D g2, int size);
 

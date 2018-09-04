@@ -74,7 +74,6 @@ public class HomePartySidePanel extends javax.swing.JPanel {
                 theCDs[i].setMouseOver(true);
             } else {
                 theCDs[i].setMouseOver(false);
-                System.out.println("twas false");
             }
         }
     }

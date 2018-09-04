@@ -18,6 +18,9 @@ public class HomeMenuPanel extends javax.swing.JPanel {
     HomeGraphicsManager theGraphicsManager;
     HomePartySidePanel theHPSP;
     ScreenDimensions scrnDim;
+    
+    HomeSubPanel[] theHomeSubPanels;
+    
     int x, y, width, height;
 
     public HomeMenuPanel(InterfaceFrame nuInterface, GameManager nuGameManager) {
@@ -26,6 +29,8 @@ public class HomeMenuPanel extends javax.swing.JPanel {
         theGameManager = nuGameManager;
         this.scrnDim = new ScreenDimensions();
         theGraphicsManager = new HomeGraphicsManager();
+        theGraphicsManager.setMunny(theGameManager.getUserManager().getGuild().getMunny());
+        theGraphicsManager.setGuildName(theGameManager.getUserManager().getGuild().getName());
 
         setupSwingComponents();
         setLayout(null);
@@ -107,12 +112,12 @@ public class HomeMenuPanel extends javax.swing.JPanel {
     }
 
     private void checkIconPressed(Point2D.Double mousePosition) {
-        theGraphicsManager.handlePlayerCharacterMousePressed(mousePosition);
+        theGraphicsManager.handleMousePressed(mousePosition);
         repaint();
     }
 
     private void checkIconHoverOver(Point2D.Double mousePosition) {
-        theGraphicsManager.handlePlayerCharacterHoverOver(mousePosition);
+        theGraphicsManager.handleHoverOver(mousePosition);
         theGraphicsManager.handleHomePartySidePanelHoverOver(mousePosition);
         repaint();
     }

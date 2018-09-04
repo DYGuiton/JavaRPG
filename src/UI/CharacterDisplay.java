@@ -53,25 +53,23 @@ class CharacterDisplay {
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         if (mouseOver) {
-            System.out.println("printed black");
             g2.setColor(Color.WHITE);
             g2.fillRect(x, y, width, height);
 
             g2.setStroke(new BasicStroke(3));
-            g2.setFont(new Font("Palatino Linotype", Font.BOLD, 20));
+            g2.setFont(new Font("Impact", Font.BOLD, 20));
             g2.setColor(Color.ORANGE);
             g2.drawString(theCharacter.getName(), x + width / 3, y + height / 3);
 
             g2.fillRect(x + width / 3, (int) (y + height / 2.90), width / 2, height / 30);
 
             g2.drawRect(x, y, width, height);
-            //g2.fillOval(x + width / 8, y + height / 8, width / 8, width / 8);
         } else {
             g2.setColor(Color.WHITE);
             g2.fillRect(x, y, width, height);
 
             g2.setStroke(new BasicStroke(3));
-            g2.setFont(new Font("Palatino Linotype", Font.BOLD, 20));
+            g2.setFont(new Font("Impact", Font.BOLD, 20));
             g2.setColor(Color.BLACK);
             g2.drawString(theCharacter.getName(), x + width / 3, y + height / 3);
 
